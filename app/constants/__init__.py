@@ -1,0 +1,2 @@
+"""Constant definitions for Imalytix."""
+

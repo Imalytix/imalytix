@@ -1,0 +1,41 @@
+# 환경 변수 (API 키 포함 - 절대 커밋 금지)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+pytest-cache-files-*/
+
+# Node
+imalytix-frontend/node_modules/
+imalytix-frontend/dist/
+imalytix-frontend/.vite/
+
+# 테스트 이미지 (용량 큼)
+samples/
+samples_test/
+scripts/test_images/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 로그
+*.log
+logs/
+
+# 빌드 산출물
+deliverables/
