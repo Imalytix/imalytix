@@ -17,6 +17,8 @@ pytest-cache-files-*/
 imalytix-frontend/node_modules/
 imalytix-frontend/dist/
 imalytix-frontend/.vite/
+imalytix-extension/node_modules/
+imalytix-extension/dist/
 
 # 테스트 이미지 (용량 큼)
 samples/

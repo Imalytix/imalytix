@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import DetailAnalysisPage from "./pages/DetailAnalysisPage";
+import DevDashboardPage from "./pages/DevDashboardPage";
 import UploadAnalysisPage from "./pages/UploadAnalysisPage";
 
 export default function App() {
@@ -8,6 +9,7 @@ export default function App() {
       <Route path="/" element={<UploadAnalysisPage />} />
       <Route path="/detail" element={<DetailAnalysisPage />} />
       <Route path="/detail/:id" element={<DetailAnalysisPage />} />
+      <Route path="/dev" element={<DevDashboardPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

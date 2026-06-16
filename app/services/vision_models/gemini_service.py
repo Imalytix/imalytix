@@ -59,10 +59,13 @@ async def analyze_with_gemini(
             contents=[prompt, image_part],
             config=types.GenerateContentConfig(
                 temperature=0.1,
-                max_output_tokens=1024,
+                max_output_tokens=2048,
+                thinking_config=types.ThinkingConfig(thinking_budget=0),
             ),
         )
     except Exception as exc:
+        from app.state import app_state
+        app_state.record_error("gemini", str(exc)[:200])
         return normalize_model_result(
             None,
             provider="gemini",
@@ -85,6 +88,11 @@ async def analyze_with_gemini(
         )
 
     parsed = extract_json_object(text)
+    from app.state import app_state
+    if parsed is not None:
+        app_state.record_success("gemini")
+    else:
+        app_state.record_error("gemini", f"JSON 파싱 실패: {text[:100]}")
     return normalize_model_result(
         parsed if parsed is not None else text,
         provider="gemini",

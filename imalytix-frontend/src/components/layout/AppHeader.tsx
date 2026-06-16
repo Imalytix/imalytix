@@ -45,6 +45,12 @@ export default function AppHeader() {
         </Link>
 
         <div className="flex items-center gap-3 text-xs">
+          <Link
+            to="/dev"
+            className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 font-medium text-slate-500 hover:bg-slate-100"
+          >
+            개발자 대시보드
+          </Link>
           <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-medium ${cfg.bg}`}>
             <CircleDot className={`h-3.5 w-3.5 ${cfg.dot}`} />
             {cfg.label}

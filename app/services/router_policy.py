@@ -24,8 +24,6 @@ def decide_routing(
             "call_openai": False,
             "call_claude": False,
             "call_gemini": False,
-            "call_hive": False,
-            "call_sightengine": False,
             "prompt_type": "quick",
             "use_cache": True,
         }
@@ -38,8 +36,6 @@ def decide_routing(
                 "call_openai": False,
                 "call_claude": False,
                 "call_gemini": False,
-                "call_hive": False,
-                "call_sightengine": False,
                 "prompt_type": prompt_type,
                 "use_cache": False,
             }
@@ -50,8 +46,6 @@ def decide_routing(
         "call_openai": has_openai_key,
         "call_claude": has_claude_key,
         "call_gemini": has_gemini_key,
-        "call_hive": False,
-        "call_sightengine": False,
         "prompt_type": prompt_type,
         "use_cache": False,
     }

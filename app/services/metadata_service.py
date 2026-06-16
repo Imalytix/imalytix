@@ -127,7 +127,9 @@ def analyze_metadata(
             evidence.append("이미지 URL 패턴에서 AI 생성 서비스 흔적이 확인되었습니다.")
 
     if not exif_found and not png_metadata_found:
-        limitations.append("메타데이터가 없다고 해서 AI 이미지라고 판단하지 않습니다.")
+        score += 10
+        evidence.append("EXIF 및 PNG 메타데이터가 전혀 없습니다. AI 생성 이미지에서 흔히 나타나는 패턴입니다.")
+        limitations.append("메타데이터 부재는 단독 근거로 충분하지 않으나 의심도를 높이는 요인입니다.")
 
     score = max(0, min(100, score))
     return MetadataAnalysisResult(

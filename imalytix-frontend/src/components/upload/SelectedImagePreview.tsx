@@ -14,7 +14,7 @@ export default function SelectedImagePreview({ imageUrl, fileName }: SelectedIma
         <img
           src={imageUrl}
           alt={fileName}
-          className="max-h-[420px] w-full rounded-[20px] object-cover shadow-[0_10px_30px_rgba(15,23,42,0.08)]"
+          className="max-h-[420px] w-full rounded-[20px] object-contain shadow-[0_10px_30px_rgba(15,23,42,0.08)]"
         />
       </div>
     </div>

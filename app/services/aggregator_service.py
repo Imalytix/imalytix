@@ -21,16 +21,11 @@ def _label_from_score(score: int) -> tuple[str, bool | None, str]:
 
 
 def _vision_multiplier(avg_score: float, confidence: str, active_signals: int) -> float:
-    """
-    비전 모델 기여 배율 결정.
-    - 다른 신호(메타데이터·탐지기)가 없을 때 비전이 유일한 판단 근거 → 배율 상향
-    - 신뢰도 high + 점수 0.8 이상이면 추가 부스트
-    """
-    base = 30.0
-
-    # 비전이 유일한 활성 신호일 때 배율 대폭 확대
+    # 비전이 유일한 신호일 때 배율 대폭 확대
     if active_signals == 1:
         base = 65.0
+    else:
+        base = 48.0  # 복수 신호 시 (기존 30 → 48로 상향)
 
     # 신뢰도 high + 강한 확신 → 추가 부스트
     if confidence == "high" and avg_score >= 0.8:
@@ -115,8 +110,17 @@ def aggregate_analysis(
         vision_contribution = avg_vision_score * multiplier
         final_score += vision_contribution
 
-    # ── 4. 시각 근거 보너스 (최대 20점) ─────────────────────────
-    final_score += min(visual_score, 20)
+        # ── 모델 합의 보너스 ─────────────────────────────────────
+        all_scores = [s for s, _, _ in weighted_scores]
+        ai_agree = sum(1 for s in all_scores if s >= 0.6)
+        real_agree = sum(1 for s in all_scores if s <= 0.35)
+        if ai_agree >= 2:
+            final_score += 8 * ai_agree  # 2모델 합의 +16, 3모델 합의 +24
+        elif real_agree >= 2:
+            final_score -= 8  # 실제 이미지 방향 합의 패널티
+
+    # ── 4. 시각 근거 보너스 (최대 25점) ─────────────────────────
+    final_score += min(visual_score, 25)
 
     # ── 5. 출처 패턴 ─────────────────────────────────────────────
     if source_result:
@@ -136,7 +140,7 @@ def aggregate_analysis(
             "label": label,
             "confidence": confidence_level,
         },
-        "evidence_summary": evidence_summary[:7],
+        "evidence_summary": evidence_summary[:10],
         "suspicious_regions": suspicious_regions[:10],
         "limitations": list(dict.fromkeys(limitations)),
         "recommended_action": make_recommendation(final_score),

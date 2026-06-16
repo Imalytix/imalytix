@@ -53,7 +53,7 @@ async def analyze_with_claude(
     try:
         response = await client.messages.create(
             model=settings.anthropic_vision_model,
-            max_tokens=1024,
+            max_tokens=2048,
             messages=[
                 {
                     "role": "user",
@@ -72,6 +72,8 @@ async def analyze_with_claude(
             ],
         )
     except Exception as exc:
+        from app.state import app_state
+        app_state.record_error("claude", str(exc)[:200])
         return normalize_model_result(
             None,
             provider="claude",
@@ -94,6 +96,11 @@ async def analyze_with_claude(
         )
 
     parsed = extract_json_object(text)
+    from app.state import app_state
+    if parsed is not None:
+        app_state.record_success("claude")
+    else:
+        app_state.record_error("claude", f"JSON 파싱 실패: {text[:100]}")
     return normalize_model_result(
         parsed if parsed is not None else text,
         provider="claude",
