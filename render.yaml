@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: imalytix-backend
+    env: python
+    region: singapore
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: APP_ENV
+        value: prod
+      - key: LOG_LEVEL
+        value: INFO
+      - key: MAX_FILE_SIZE_MB
+        value: 10
+      - key: IMAGE_LONG_SIDE
+        value: 1024
+      - key: REQUEST_TIMEOUT_SECONDS
+        value: 60
+      - key: MOCK_VISION_FALLBACK
+        value: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: HIVE_API_KEY
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
