@@ -18,6 +18,7 @@ from app.services.router_policy import decide_routing, has_strong_metadata_evide
 from app.services.source_pattern_service import analyze_source_patterns
 from app.services.vision_models.claude_service import analyze_with_claude
 from app.services.vision_models.gemini_service import analyze_with_gemini
+from app.services.ai_detectors.hive_service import analyze_with_hive
 from app.services.vision_models.openai_service import analyze_with_openai
 from app.utils.errors import ImageValidationError, SecurityViolationError
 
@@ -134,9 +135,18 @@ async def analyze_image_bytes(
         has_openai_key=bool(settings.openai_api_key),
         has_gemini_key=bool(settings.gemini_api_key),
         has_claude_key=bool(settings.anthropic_api_key),
+        has_hive_key=bool(settings.hive_api_key),
     )
     detector_results: list[dict] = []
     vision_results: list[dict] = []
+
+    if routing.get("call_hive"):
+        hive_result = await analyze_with_hive(
+            image_bytes=normalized_bytes,
+            mime_type="image/jpeg",
+            settings=settings,
+        )
+        detector_results.append(hive_result)
 
     if routing.get("call_openai"):
         vision_result = await analyze_with_openai(

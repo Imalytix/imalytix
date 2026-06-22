@@ -23,6 +23,7 @@ class VisionModelResult(BaseModel):
     is_ai_generated: bool | None = None
     score: float = 0.5
     confidence: str = "low"
+    content_type: str | None = None
     evidence: list[EvidenceItem] = Field(default_factory=list)
     suspicious_regions: list[SuspiciousRegion] = Field(default_factory=list)
     limitations: list[str] = Field(default_factory=list)

@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     gemini_vision_model: str = Field(default="gemini-2.5-flash", alias="GEMINI_VISION_MODEL")
     anthropic_api_key: str | None = Field(default=None, alias="ANTHROPIC_API_KEY")
     anthropic_vision_model: str = Field(default="claude-haiku-4-5-20251001", alias="ANTHROPIC_VISION_MODEL")
+    hive_api_key: str | None = Field(default=None, alias="HIVE_API_KEY")
     max_file_size_mb: int = Field(default=10, alias="MAX_FILE_SIZE_MB")
     image_long_side: int = Field(default=1024, alias="IMAGE_LONG_SIDE")
     request_timeout_seconds: int = Field(default=60, alias="REQUEST_TIMEOUT_SECONDS")

@@ -41,3 +41,10 @@ logs/
 
 # 빌드 산출물
 deliverables/
+
+# PDF 생성 산출물 (tools/md_to_pdf.py로 재생성 가능)
+*.pdf
+
+# TypeScript 빌드 캐시
+tsconfig.tsbuildinfo
+imalytix-extension/tsconfig.tsbuildinfo

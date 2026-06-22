@@ -75,12 +75,17 @@ def normalize_model_result(raw_result: dict[str, Any] | str | None, provider: st
             error_message=error_message,
         )
 
+    valid_content_types = {"face", "body", "animal", "landscape", "object", "text", "other"}
+    raw_ct = parsed.get("content_type")
+    content_type = str(raw_ct) if raw_ct and str(raw_ct) in valid_content_types else None
+
     return VisionModelResult(
         provider=provider,
         model_name=model_name,
         is_ai_generated=parsed.get("is_ai_generated"),
         score=_clamp_score(parsed.get("score", 0.5)),
         confidence=str(parsed.get("confidence", "low")),
+        content_type=content_type,
         evidence=_normalize_evidence(parsed.get("evidence")),
         suspicious_regions=_normalize_regions(parsed.get("suspicious_regions")),
         limitations=[str(item) for item in parsed.get("limitations", []) if item],

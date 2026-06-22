@@ -6,10 +6,10 @@ from app.config import Settings
 from app.schemas.model_result import VisionModelResult
 from app.services.model_normalizer import normalize_model_result
 from app.utils.json_parser import extract_json_object
-from app.services.vision_models.openai_service import (
-    detect_image_type,
-    build_prompt,
+from app.services.vision_models.prompts import (
     build_mock_response,
+    build_prompt,
+    detect_image_type,
 )
 
 
@@ -45,7 +45,7 @@ async def analyze_with_claude(
         )
 
     image_type = detect_image_type(image_bytes)
-    prompt = build_prompt(prompt_type, image_type)
+    prompt = build_prompt(prompt_type, image_type, provider="claude")
     image_base64 = base64.b64encode(image_bytes).decode("utf-8")
 
     client = anthropic.AsyncAnthropic(api_key=settings.anthropic_api_key)

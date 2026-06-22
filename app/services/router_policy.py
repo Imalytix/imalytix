@@ -18,12 +18,14 @@ def decide_routing(
     has_openai_key: bool = True,
     has_gemini_key: bool = False,
     has_claude_key: bool = False,
+    has_hive_key: bool = False,
 ) -> dict:
     if cache_hit:
         return {
             "call_openai": False,
             "call_claude": False,
             "call_gemini": False,
+            "call_hive": False,
             "prompt_type": "quick",
             "use_cache": True,
         }
@@ -36,6 +38,7 @@ def decide_routing(
                 "call_openai": False,
                 "call_claude": False,
                 "call_gemini": False,
+                "call_hive": False,
                 "prompt_type": prompt_type,
                 "use_cache": False,
             }
@@ -46,6 +49,7 @@ def decide_routing(
         "call_openai": has_openai_key,
         "call_claude": has_claude_key,
         "call_gemini": has_gemini_key,
+        "call_hive": has_hive_key,
         "prompt_type": prompt_type,
         "use_cache": False,
     }

@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import type { SuspiciousRegion } from "../../types/analysis";
+import { isValidBBox } from "../../utils/bbox";
 
 interface SuspiciousRegionListProps {
   regions: SuspiciousRegion[];
@@ -40,11 +41,16 @@ export default function SuspiciousRegionList({
         >
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 font-semibold text-slate-700">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-slate-200 bg-slate-50 font-semibold text-slate-700">
                 {index + 1}
               </div>
               <div>
-                <div className="font-semibold text-slate-900">{region.label}</div>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-slate-900">{region.label}</span>
+                  {!isValidBBox(region.bbox) && (
+                    <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-400">위치 정보 없음</span>
+                  )}
+                </div>
                 <div className="mt-1 text-xs text-slate-500">{region.description}</div>
               </div>
             </div>
