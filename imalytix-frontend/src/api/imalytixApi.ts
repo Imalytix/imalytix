@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { AnalysisResult } from "../types/analysis";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api/v1";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://imalytix-backend.onrender.com/api/v1";
 
 export async function analyzeImageFile(file: File): Promise<AnalysisResult> {
   const formData = new FormData();

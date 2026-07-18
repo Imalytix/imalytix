@@ -86,13 +86,13 @@ async function openInWebApp(result: AnalysisResult, preview: string | null) {
 export default function SidePanelApp() {
   const [state, setState] = useState<State>({ phase: "idle" });
   const [showSettings, setShowSettings] = useState(false);
-  const [apiUrl, setApiUrl] = useState("http://localhost:8000/api/v1");
-  const [webAppUrl, setWebAppUrl] = useState("http://localhost:5173");
+  const [apiUrl, setApiUrl] = useState("https://imalytix-backend.onrender.com/api/v1");
+  const [webAppUrl, setWebAppUrl] = useState("https://imalytix.vercel.app");
   const [loadingStep, setLoadingStep] = useState(0);
 
   useEffect(() => {
     chrome.storage.sync.get(
-      { apiUrl: "http://localhost:8000/api/v1", webAppUrl: "http://localhost:5173" },
+      { apiUrl: "https://imalytix-backend.onrender.com/api/v1", webAppUrl: "https://imalytix.vercel.app" },
       (r) => {
         setApiUrl(r.apiUrl as string);
         setWebAppUrl(r.webAppUrl as string);
@@ -227,7 +227,7 @@ export default function SidePanelApp() {
             <div className="space-y-1">
               <div className="text-sm font-semibold text-rose-800">분석 실패</div>
               <div className="text-xs text-rose-700">{state.error}</div>
-              <div className="text-[10px] text-rose-500">백엔드 서버(http://localhost:8000)가 실행 중인지 확인하세요.</div>
+              <div className="text-[10px] text-rose-500">백엔드 서버에 연결할 수 없습니다. 설정에서 API URL을 확인하세요.</div>
             </div>
           </div>
         )}
