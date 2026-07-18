@@ -1,6 +1,6 @@
 import type { AnalysisResult } from "../types/analysis";
 
-const DEFAULT_API_URL = "http://localhost:8000/api/v1";
+const DEFAULT_API_URL = "https://imalytix-backend.onrender.com/api/v1";
 
 async function getApiUrl(): Promise<string> {
   return new Promise((resolve) => {

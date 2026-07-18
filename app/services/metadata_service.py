@@ -34,11 +34,13 @@ def analyze_metadata(
     ai_tool_detected = False
     detected_tools: list[str] = []
     evidence: list[str] = []
-    limitations = ["메타데이터는 수정 가능하므로 단독 판정 근거로 사용하지 않습니다."]
+    limitations = [
+        "메타데이터는 수정 가능하므로 단독 판정 근거로 사용하지 않습니다.",
+    ]
     raw: dict[str, Any] = {}
     score = 0
 
-    exif = {}
+    exif: dict[str, str] = {}
     try:
         exif_data = image.getexif() or {}
         for key, value in exif_data.items():
@@ -80,9 +82,9 @@ def analyze_metadata(
     if any(camera_fields):
         if lens_model:
             score -= 15
-            evidence.append("LensModel 또는 촬영 정보가 확인되어 실제 카메라 촬영 흔적을 반영했습니다.")
+            evidence.append("LensModel 등 촬영 정보가 확인되어 실제 카메라 사진의 가능성을 반영했습니다.")
 
-    png_info = {}
+    png_info: dict[str, str] = {}
     try:
         png_info = {k.lower(): _to_text(v) for k, v in (image.info or {}).items() if _to_text(v)}
         if (image_format or getattr(image, "format", "") or "").upper() == "PNG":
@@ -102,7 +104,7 @@ def analyze_metadata(
             score += 35
             ai_tool_detected = True
             detected_tools.append("Stable Diffusion")
-            evidence.append("PNG parameters 필드에서 Stable Diffusion 생성 정보가 확인되었습니다.")
+            evidence.append("PNG parameters 필드에서 Stable Diffusion 생성 흔적이 확인되었습니다.")
     if "workflow" in png_info and png_info["workflow"].strip():
         try:
             parsed = json.loads(png_info["workflow"])
@@ -127,9 +129,7 @@ def analyze_metadata(
             evidence.append("이미지 URL 패턴에서 AI 생성 서비스 흔적이 확인되었습니다.")
 
     if not exif_found and not png_metadata_found:
-        score += 10
-        evidence.append("EXIF 및 PNG 메타데이터가 전혀 없습니다. AI 생성 이미지에서 흔히 나타나는 패턴입니다.")
-        limitations.append("메타데이터 부재는 단독 근거로 충분하지 않으나 의심도를 높이는 요인입니다.")
+        limitations.append("메타데이터 부재는 흔한 상황이며 단독으로는 판정 근거가 되지 않습니다.")
 
     score = max(0, min(100, score))
     return MetadataAnalysisResult(

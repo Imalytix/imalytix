@@ -20,6 +20,45 @@ copy .env.example .env
 uvicorn app.main:app --reload
 ```
 
+### Local prototype mode
+
+If you want to run without external model calls or API spend, keep the following in `.env`:
+
+```env
+MOCK_VISION_FALLBACK=true
+```
+
+### Frontend
+
+```bash
+cd imalytix-frontend
+npm.cmd install
+npm.cmd run dev
+```
+
+Open `http://localhost:5173`.
+
+### Extension
+
+```bash
+cd imalytix-extension
+npm.cmd install
+npm.cmd run build
+```
+
+Then load `imalytix-extension/dist` in `chrome://extensions` using "Load unpacked".
+
+### Phase A benchmark
+
+```bash
+python scripts/run_phase_a_benchmark.py
+```
+
+This writes:
+
+- `benchmarks/phase_a_manifest.json`
+- `reports/phase_a_benchmark_report.md`
+
 ## Endpoints
 
 ```text
@@ -34,3 +73,7 @@ POST /api/v1/analyze/image-url
 - If `OPENAI_API_KEY` is missing and the request needs a vision call, the API returns a clear `503` error.
 - If you want to prototype without keys, set `MOCK_VISION_FALLBACK=true` in `.env` and the Vision step will return a deterministic mock response.
 - The MVP keeps interface stubs for C2PA, OCR, Redis, PostgreSQL, Claude, Gemini, Hive, Sightengine, and Reality Defender.
+- Analysis runs are logged to `logs/analysis.log` as JSON lines.
+- General application logs go to `logs/imalytix.log`.
+- Log rotation defaults to 5 MB per file with 5 backups.
+- Slow analysis requests emit a warning when they cross `ANALYSIS_SLOW_THRESHOLD_MS`.

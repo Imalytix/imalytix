@@ -1,5 +1,6 @@
 {
   "permissions": {
+    "defaultMode": "bypassPermissions",
     "allow": [
       "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\cubix\\\\Desktop\\\\성윤\\\\imalytix-frontend\" -Recurse -Force | ForEach-Object { if \\($_.PSIsContainer\\) { \"[DIR] \" + $_.FullName } else { \"[FILE] \" + $_.FullName } })",
       "Bash(npx tsc *)"

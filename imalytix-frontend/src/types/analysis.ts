@@ -73,6 +73,24 @@ export interface AnalysisInput {
   phash?: string;
 }
 
+export interface RiskSignal {
+  name: string;
+  score: number;
+  description: string;
+}
+
+export interface TrustAnalysis {
+  theft_risk_score: number;
+  forgery_risk_score: number;
+  combined_risk_score: number;
+  trust_score: number;
+  label: string;
+  confidence: Confidence;
+  evidence: string[];
+  limitations: string[];
+  signals: RiskSignal[];
+}
+
 export interface AnalysisResult {
   product: string;
   request_id: string;
@@ -82,6 +100,7 @@ export interface AnalysisResult {
   metadata_analysis?: MetadataAnalysis;
   detector_results: DetectorResult[];
   vision_results: VisionResult[];
+  trust_analysis?: TrustAnalysis;
   evidence_summary: string[];
   suspicious_regions: SuspiciousRegion[];
   limitations: string[];

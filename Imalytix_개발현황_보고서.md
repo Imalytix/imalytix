@@ -427,7 +427,6 @@ return_bbox : true | false      (default: true)
 - [x] OpenAI 콘텐츠 정책 거부 자동 처리
 
 ### 진행 예정
-- [ ] Hive AI V2 Project Key 발급 및 연동 완료
 - [ ] 테스트 이미지 데이터셋 구축
 - [ ] RAG 기반 AI 생성기 핑거프린트 DB
 - [ ] 성능 벤치마킹 (정확도 / 처리 속도)

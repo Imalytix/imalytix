@@ -111,11 +111,16 @@ def aggregate_analysis(
         final_score += vision_contribution
 
         # ── 모델 합의 보너스 ─────────────────────────────────────
+        # 점수 기반: 0.50 이상이면 AI 의심으로 카운트 (기존 0.60 → 0.50)
+        # 판정 기반: is_ai_generated=True 필드도 함께 반영
         all_scores = [s for s, _, _ in weighted_scores]
-        ai_agree = sum(1 for s in all_scores if s >= 0.6)
-        real_agree = sum(1 for s in all_scores if s <= 0.35)
+        ai_agree_score   = sum(1 for s in all_scores if s >= 0.50)
+        ai_agree_verdict = sum(1 for r in valid_vision if r.get("is_ai_generated") is True)
+        ai_agree = max(ai_agree_score, ai_agree_verdict)
+
+        real_agree = sum(1 for s in all_scores if s <= 0.30)
         if ai_agree >= 2:
-            final_score += 8 * ai_agree  # 2모델 합의 +16, 3모델 합의 +24
+            final_score += 10 * ai_agree  # 2모델 합의 +20, 3모델 합의 +30
         elif real_agree >= 2:
             final_score -= 8  # 실제 이미지 방향 합의 패널티
 

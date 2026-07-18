@@ -5,12 +5,12 @@ import base64
 from app.config import Settings
 from app.schemas.model_result import VisionModelResult
 from app.services.model_normalizer import normalize_model_result
-from app.utils.json_parser import extract_json_object
 from app.services.vision_models.prompts import (
     build_mock_response,
     build_prompt,
     detect_image_type,
 )
+from app.utils.json_parser import extract_json_object
 
 
 async def analyze_with_claude(
@@ -19,6 +19,8 @@ async def analyze_with_claude(
     prompt_type: str,
     settings: Settings,
 ) -> VisionModelResult:
+    # If the API key is missing, keep the pipeline usable by returning
+    # a deterministic mock result instead of failing the whole request.
     if not settings.anthropic_api_key:
         if settings.mock_vision_fallback:
             return normalize_model_result(
@@ -31,7 +33,7 @@ async def analyze_with_claude(
             None,
             provider="claude",
             model_name=settings.anthropic_vision_model,
-            error_message="ANTHROPIC_API_KEY가 설정되지 않았습니다.",
+            error_message="ANTHROPIC_API_KEY is not configured.",
         )
 
     try:
@@ -41,14 +43,20 @@ async def analyze_with_claude(
             None,
             provider="claude",
             model_name=settings.anthropic_vision_model,
-            error_message=f"anthropic 패키지를 사용할 수 없습니다: {exc}",
+            error_message=f"Failed to import anthropic SDK: {exc}",
         )
 
+    # Match the prompt to the image style so Claude follows the same
+    # analysis policy as the other vision providers.
     image_type = detect_image_type(image_bytes)
     prompt = build_prompt(prompt_type, image_type, provider="claude")
-    image_base64 = base64.b64encode(image_bytes).decode("utf-8")
 
-    client = anthropic.AsyncAnthropic(api_key=settings.anthropic_api_key)
+    # Claude receives image input as a base64 source block.
+    image_base64 = base64.b64encode(image_bytes).decode("utf-8")
+    client = anthropic.AsyncAnthropic(
+        api_key=settings.anthropic_api_key,
+        timeout=float(settings.request_timeout_seconds),
+    )
 
     try:
         response = await client.messages.create(
@@ -73,34 +81,48 @@ async def analyze_with_claude(
         )
     except Exception as exc:
         from app.state import app_state
-        app_state.record_error("claude", str(exc)[:200])
+
+        # Keep the provider health counters and recent errors up to date.
+        app_state.record_error("claude", f"API error: {exc}")
         return normalize_model_result(
             None,
             provider="claude",
             model_name=settings.anthropic_vision_model,
-            error_message=f"Claude API 호출 실패: {exc}",
+            error_message=f"Claude API request failed: {exc}",
         )
 
+    # Claude usually returns a list of content blocks.
+    # We read the first text block and then parse JSON from it.
     text = ""
     try:
-        text = response.content[0].text if response.content else ""
+        if getattr(response, "content", None):
+            first_block = response.content[0]
+            text = getattr(first_block, "text", "") or ""
     except Exception:
-        pass
+        text = ""
 
     if not text:
+        from app.state import app_state
+
+        app_state.record_error("claude", "Claude returned an empty response.")
         return normalize_model_result(
             None,
             provider="claude",
             model_name=settings.anthropic_vision_model,
-            error_message="Claude 응답이 비어 있습니다.",
+            error_message="Claude returned an empty response.",
         )
 
+    # The model is prompted to output JSON, but we still defensively extract
+    # the first JSON object from any surrounding prose.
     parsed = extract_json_object(text)
+
     from app.state import app_state
+
     if parsed is not None:
         app_state.record_success("claude")
     else:
-        app_state.record_error("claude", f"JSON 파싱 실패: {text[:100]}")
+        app_state.record_error("claude", f"JSON parse failed: {text[:100]}")
+
     return normalize_model_result(
         parsed if parsed is not None else text,
         provider="claude",

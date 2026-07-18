@@ -1,0 +1,4 @@
+rows=30
+used_bytes=3973788
+used_gb=0.004
+max_gb=5.0

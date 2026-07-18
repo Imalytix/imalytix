@@ -4,10 +4,13 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_settings
-from app.routers.analyze import router as analyze_router
-from app.routers.health import router as health_router
+from app.utils.logger import setup_logging
 
 settings = get_settings()
+setup_logging(settings)
+
+from app.routers.analyze import router as analyze_router
+from app.routers.health import router as health_router
 
 app = FastAPI(
     title="Imalytix API",

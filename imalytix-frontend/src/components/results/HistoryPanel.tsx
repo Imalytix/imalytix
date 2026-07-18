@@ -31,7 +31,7 @@ export default function HistoryPanel({ history, onClear }: HistoryPanelProps) {
   if (history.length === 0) return null;
 
   return (
-    <div className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.05)]">
+    <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Clock className="h-4 w-4 text-slate-400" />

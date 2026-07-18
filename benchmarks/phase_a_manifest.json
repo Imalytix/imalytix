@@ -1,0 +1,182 @@
+[
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\01_portraits\\01_portraits_01_REAL_portrait-woman.jpg",
+    "category": "01_portraits",
+    "label": "REAL",
+    "filename": "01_portraits_01_REAL_portrait-woman.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\01_portraits\\01_portraits_02_AI_portrait-woman.jpg",
+    "category": "01_portraits",
+    "label": "AI",
+    "filename": "01_portraits_02_AI_portrait-woman.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\01_portraits\\01_portraits_03_REAL_elderly-man.jpg",
+    "category": "01_portraits",
+    "label": "REAL",
+    "filename": "01_portraits_03_REAL_elderly-man.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\02_landscape\\02_landscape_01_REAL_mountain-lake.jpg",
+    "category": "02_landscape",
+    "label": "REAL",
+    "filename": "02_landscape_01_REAL_mountain-lake.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\02_landscape\\02_landscape_02_AI_mountain-sunset.jpg",
+    "category": "02_landscape",
+    "label": "AI",
+    "filename": "02_landscape_02_AI_mountain-sunset.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\02_landscape\\02_landscape_03_REAL_ocean-beach.jpg",
+    "category": "02_landscape",
+    "label": "REAL",
+    "filename": "02_landscape_03_REAL_ocean-beach.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\03_animals\\03_animals_01_REAL_cat-closeup.jpg",
+    "category": "03_animals",
+    "label": "REAL",
+    "filename": "03_animals_01_REAL_cat-closeup.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\03_animals\\03_animals_02_AI_tiger-forest.jpg",
+    "category": "03_animals",
+    "label": "AI",
+    "filename": "03_animals_02_AI_tiger-forest.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\03_animals\\03_animals_03_REAL_bird-branch.jpg",
+    "category": "03_animals",
+    "label": "REAL",
+    "filename": "03_animals_03_REAL_bird-branch.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\04_food\\04_food_01_REAL_food-plate.jpg",
+    "category": "04_food",
+    "label": "REAL",
+    "filename": "04_food_01_REAL_food-plate.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\04_food\\04_food_02_AI_bibimbap-bowl.jpg",
+    "category": "04_food",
+    "label": "AI",
+    "filename": "04_food_02_AI_bibimbap-bowl.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\04_food\\04_food_03_REAL_dessert-cake.jpg",
+    "category": "04_food",
+    "label": "REAL",
+    "filename": "04_food_03_REAL_dessert-cake.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\05_architecture\\05_architecture_01_REAL_modern-building.jpg",
+    "category": "05_architecture",
+    "label": "REAL",
+    "filename": "05_architecture_01_REAL_modern-building.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\05_architecture\\05_architecture_02_AI_futuristic-city.jpg",
+    "category": "05_architecture",
+    "label": "AI",
+    "filename": "05_architecture_02_AI_futuristic-city.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\05_architecture\\05_architecture_03_REAL_old-church.jpg",
+    "category": "05_architecture",
+    "label": "REAL",
+    "filename": "05_architecture_03_REAL_old-church.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\06_abstract\\06_abstract_01_REAL_texture-pattern.jpg",
+    "category": "06_abstract",
+    "label": "REAL",
+    "filename": "06_abstract_01_REAL_texture-pattern.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\06_abstract\\06_abstract_02_AI_geometric-art.jpg",
+    "category": "06_abstract",
+    "label": "AI",
+    "filename": "06_abstract_02_AI_geometric-art.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\06_abstract\\06_abstract_03_REAL_color-splash.jpg",
+    "category": "06_abstract",
+    "label": "REAL",
+    "filename": "06_abstract_03_REAL_color-splash.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\07_products\\07_products_01_REAL_product-shot.jpg",
+    "category": "07_products",
+    "label": "REAL",
+    "filename": "07_products_01_REAL_product-shot.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\07_products\\07_products_02_AI_sneakers-white.jpg",
+    "category": "07_products",
+    "label": "AI",
+    "filename": "07_products_02_AI_sneakers-white.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\07_products\\07_products_03_REAL_watch-close.jpg",
+    "category": "07_products",
+    "label": "REAL",
+    "filename": "07_products_03_REAL_watch-close.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\08_text_ocr\\08_text_ocr_01_REAL_street-sign.jpg",
+    "category": "08_text_ocr",
+    "label": "REAL",
+    "filename": "08_text_ocr_01_REAL_street-sign.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\08_text_ocr\\08_text_ocr_02_AI_neon-sign-city.jpg",
+    "category": "08_text_ocr",
+    "label": "AI",
+    "filename": "08_text_ocr_02_AI_neon-sign-city.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\08_text_ocr\\08_text_ocr_03_REAL_book-text.jpg",
+    "category": "08_text_ocr",
+    "label": "REAL",
+    "filename": "08_text_ocr_03_REAL_book-text.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\09_charts\\09_charts_01_REAL_office-desk.jpg",
+    "category": "09_charts",
+    "label": "REAL",
+    "filename": "09_charts_01_REAL_office-desk.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\09_charts\\09_charts_02_AI_data-dashboard.jpg",
+    "category": "09_charts",
+    "label": "AI",
+    "filename": "09_charts_02_AI_data-dashboard.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\09_charts\\09_charts_03_REAL_notebook-plan.jpg",
+    "category": "09_charts",
+    "label": "REAL",
+    "filename": "09_charts_03_REAL_notebook-plan.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\10_illustration\\10_illustration_01_REAL_painting-canvas.jpg",
+    "category": "10_illustration",
+    "label": "REAL",
+    "filename": "10_illustration_01_REAL_painting-canvas.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\10_illustration\\10_illustration_02_AI_digital-art.jpg",
+    "category": "10_illustration",
+    "label": "AI",
+    "filename": "10_illustration_02_AI_digital-art.jpg"
+  },
+  {
+    "path": "C:\\Users\\cubix\\Desktop\\성윤\\samples_test\\10_illustration\\10_illustration_03_REAL_art-gallery.jpg",
+    "category": "10_illustration",
+    "label": "REAL",
+    "filename": "10_illustration_03_REAL_art-gallery.jpg"
+  }
+]
