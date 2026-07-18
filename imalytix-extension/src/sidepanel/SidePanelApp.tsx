@@ -86,13 +86,13 @@ async function openInWebApp(result: AnalysisResult, preview: string | null) {
 export default function SidePanelApp() {
   const [state, setState] = useState<State>({ phase: "idle" });
   const [showSettings, setShowSettings] = useState(false);
-  const [apiUrl, setApiUrl] = useState("https://imalytix-backend.onrender.com/api/v1");
-  const [webAppUrl, setWebAppUrl] = useState("https://imalytix.vercel.app");
+  const [apiUrl, setApiUrl] = useState("http://localhost:8000/api/v1");
+  const [webAppUrl, setWebAppUrl] = useState("http://localhost:5173");
   const [loadingStep, setLoadingStep] = useState(0);
 
   useEffect(() => {
     chrome.storage.sync.get(
-      { apiUrl: "https://imalytix-backend.onrender.com/api/v1", webAppUrl: "https://imalytix.vercel.app" },
+      { apiUrl: "http://localhost:8000/api/v1", webAppUrl: "http://localhost:5173" },
       (r) => {
         setApiUrl(r.apiUrl as string);
         setWebAppUrl(r.webAppUrl as string);
